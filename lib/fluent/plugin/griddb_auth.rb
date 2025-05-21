@@ -59,7 +59,9 @@ module Fluent
       res = nil
       begin      
         @last_request_time = Time.now.to_f        
-        res = Net::HTTP.start(uri.host, uri.port) {|http| http.request(req) }
+        res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+          http.request(req)
+        end
   
       rescue => e 
         log.warn "Net::HTTP.#{req.method.capitalize} raises exception: #{e.class}, '#{e.message}'"
