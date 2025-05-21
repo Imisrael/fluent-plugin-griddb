@@ -47,7 +47,7 @@ module Fluent
     # Create new request
     def create_request(record)
       url = format_url()
-      uri = URI.parse(URI.encode(url))
+      uri = URI.parse(url)
       req = Net::HTTP::Put.new(uri.request_uri)
 	  req.basic_auth(@username, @password)
       set_body(req, record)
